@@ -10,7 +10,7 @@ export default function App() {
           current value between rolls.
         </span>
       </div>
-      <div className="grid grid-cols-6 gap-1">
+      <div className="grid grid-cols-6 gap-4 p-4">
         {Array.from({ length: 12 }).map((_, i) => (
           <Die key={i} id={i} value="1" />
         ))}
