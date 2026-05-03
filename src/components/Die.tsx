@@ -2,14 +2,16 @@ type Props = {
   id: number;
   value: string;
   locked?: boolean;
+  onClick: () => void;
 };
 
-export default function Die({ value, locked = false }: Props) {
+export default function Die({ value, onClick, locked = false }: Props) {
   return (
-    <div
+    <button
       className={`bg-(--foreground) border text-(--accent) aspect-square text-4xl flex items-center justify-center ${locked ? "border-(--accent)" : "border-(--secondary)"}`}
+      onClick={onClick}
     >
       {value}
-    </div>
+    </button>
   );
 }
