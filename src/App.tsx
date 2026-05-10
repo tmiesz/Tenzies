@@ -10,6 +10,8 @@ export default function App() {
       .map(() => Math.ceil(Math.random() * 6));
   }
 
+  const dice = board.map((die, i) => <Die id={i} value={die} />);
+
   return (
     <>
       <div className="border flex flex-col items-center">
@@ -20,11 +22,7 @@ export default function App() {
         </span>
       </div>
       <div className="border w-3xl m-auto">
-        <div className="grid grid-cols-6 gap-4 p-4">
-          {board.map((die, i) => (
-            <Die id={i} value={die} />
-          ))}
-        </div>
+        <div className="grid grid-cols-6 gap-4 p-4">{dice}</div>
       </div>
       <div className="flex flex-col items-center">
         <button className="border">Roll</button>
