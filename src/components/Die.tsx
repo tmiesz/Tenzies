@@ -1,6 +1,6 @@
 type Props = {
   id: number;
-  value: string;
+  value: number;
   locked?: boolean;
   onClick: () => void;
 };
