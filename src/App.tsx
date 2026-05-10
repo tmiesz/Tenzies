@@ -2,18 +2,12 @@ import { useState, type JSX } from "react";
 import Die from "./components/Die";
 
 export default function App() {
-  const [board, setBoard] = useState(GenerateNewBoard());
+  const [board, setBoard] = useState(GenerateDiceValues());
 
-  function LockDie(): void {}
-
-  function GenerateRandomNumber(): number {
-    return Math.ceil(Math.random() * 6);
-  }
-
-  function GenerateNewBoard(): JSX.Element[] {
-    return Array.from({ length: 12 }).map((_, i) => (
-      <Die key={i} id={i} value={GenerateRandomNumber()} onClick={LockDie} />
-    ));
+  function GenerateDiceValues(): number[] {
+    return Array(12)
+      .fill(0)
+      .map(() => Math.ceil(Math.random() * 6));
   }
 
   return (
@@ -26,7 +20,11 @@ export default function App() {
         </span>
       </div>
       <div className="border w-3xl m-auto">
-        <div className="grid grid-cols-6 gap-4 p-4">{board}</div>
+        <div className="grid grid-cols-6 gap-4 p-4">
+          {board.map((die, i) => (
+            <Die id={i} value={die} />
+          ))}
+        </div>
       </div>
       <div className="flex flex-col items-center">
         <button className="border">Roll</button>
