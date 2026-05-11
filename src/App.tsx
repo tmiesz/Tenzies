@@ -1,19 +1,26 @@
 import { useState } from "react";
-import Die from "./components/Die";
+import Die, { type DieProps } from "./components/Die";
+import { v4 as uuidv4 } from "uuid";
 
 export default function App() {
-  const [board, setBoard] = useState(GenerateDiceValues());
+  const [board, setBoard] = useState(GenerateDice());
 
-  function GenerateDiceValues(): number[] {
+  function GenerateDice(): DieProps[] {
     return Array(10)
       .fill(0)
-      .map(() => Math.ceil(Math.random() * 6));
+      .map(() => ({
+        id: uuidv4(),
+        value: Math.ceil(Math.random() * 6),
+        locked: false,
+      }));
   }
 
-  const dice = board.map((die, i) => <Die id={i} value={die} />);
+  const dice = board.map((props) => (
+    <Die id={props.id} value={props.value} locked={props.locked} />
+  ));
 
   function rollDice() {
-    setBoard(GenerateDiceValues());
+    setBoard(GenerateDice());
   }
 
   return (
