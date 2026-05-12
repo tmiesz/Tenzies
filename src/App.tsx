@@ -31,7 +31,11 @@ export default function App() {
   }
 
   function holdDie(id: string) {
-    console.log(id);
+    setBoard((prev) =>
+      prev.map((die) =>
+        die.id === id ? { ...die, locked: !die.locked } : die,
+      ),
+    );
   }
 
   return (
