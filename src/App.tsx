@@ -51,16 +51,16 @@ export default function App() {
 
   return (
     <>
-      <div className="border flex flex-col gap-4 items-center">
-        <div className="border flex flex-col items-center p-4">
-          <h1 className="var(--accent) text-3xl">Tenzies</h1>
-          <span>
+      <div className="flex flex-col gap-4 items-center">
+        <div className="flex flex-col items-center p-4">
+          <h1 className="text-(--primary) text-3xl">Tenzies</h1>
+          <span className="text-(--secondary)">
             Roll until all dice are the same. Click each die to freeze it at
             current value between rolls.
           </span>
         </div>
-        <div className="border grid grid-cols-5 w-2xl gap-2">{dice}</div>
-        <div className="border">
+        <div className="grid grid-cols-5 w-2xl gap-2">{dice}</div>
+        <div>
           <button
             className="bg-(--foreground) rounded-2xl text-(--accent) text-4xl p-4 cursor-pointer"
             onClick={rollDice}
