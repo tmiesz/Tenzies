@@ -5,6 +5,9 @@ import { v4 as uuidv4 } from "uuid";
 export default function App() {
   const [board, setBoard] = useState(generateBoard());
 
+  if (board.every((die) => die.value === board[0].value && die.locked))
+    console.log("game won");
+
   function generateBoard(): DieProps[] {
     return Array(10)
       .fill(0)
