@@ -3,17 +3,21 @@ import Die, { type DieProps } from "./components/Die";
 import { v4 as uuidv4 } from "uuid";
 
 export default function App() {
-  const [board, setBoard] = useState(generateDice());
+  const [board, setBoard] = useState(generateBoard());
 
-  function generateDice(): DieProps[] {
+  function generateBoard(): DieProps[] {
     return Array(10)
       .fill(0)
-      .map(() => ({
-        id: uuidv4(),
-        value: Math.ceil(Math.random() * 6),
-        locked: false,
-        hold: holdDie,
-      }));
+      .map(() => generateDie());
+  }
+
+  function generateDie(): DieProps {
+    return {
+      id: uuidv4(),
+      value: Math.ceil(Math.random() * 6),
+      locked: false,
+      hold: holdDie,
+    };
   }
 
   const dice = board.map((die) => (
@@ -27,7 +31,14 @@ export default function App() {
   ));
 
   function rollDice() {
-    setBoard(generateDice());
+    //with this we change only the value
+    setBoard((prev) =>
+      prev.map((die) =>
+        die.locked ? die : { ...die, value: Math.ceil(Math.random() * 6) },
+      ),
+    );
+    //here we also replace id and hold
+    // setBoard((prev) => prev.map((die) => (die.locked ? die : generateDie())));
   }
 
   function holdDie(id: string) {
