@@ -56,6 +56,9 @@ export default function App() {
 
   return (
     <>
+      <div aria-live="polite" className="sr-only">
+        {gameWon && <p>Congratulations! You have won the game!</p>}
+      </div>
       <div className="flex flex-col gap-4 items-center">
         <div className="flex flex-col items-center p-4">
           <h1 className="text-(--primary) text-3xl">Tenzies</h1>
