@@ -4,9 +4,11 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function App() {
   const [board, setBoard] = useState(generateBoard());
+  let gameWon = false;
 
-  if (board.every((die) => die.value === board[0].value && die.locked))
-    console.log("game won");
+  if (board.every((die) => die.value === board[0].value && die.locked)) {
+    gameWon = true;
+  }
 
   function generateBoard(): DieProps[] {
     return Array(10)
@@ -68,7 +70,7 @@ export default function App() {
             className="bg-(--foreground) rounded-2xl text-(--accent) text-4xl px-4 py-2 cursor-pointer"
             onClick={rollDice}
           >
-            Roll
+            {gameWon ? "New Game" : "Roll"}
           </button>
         </div>
       </div>
