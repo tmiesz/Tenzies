@@ -3,7 +3,7 @@ import Die, { type DieProps } from "./components/Die";
 import { v4 as uuidv4 } from "uuid";
 
 export default function App() {
-  const [board, setBoard] = useState(generateBoard());
+  const [board, setBoard] = useState(() => generateBoard());
   let gameWon = false;
 
   if (board.every((die) => die.value === board[0].value && die.locked)) {
