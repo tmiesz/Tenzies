@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Die, { type DieProps } from "./components/Die";
 import { v4 as uuidv4 } from "uuid";
 
 export default function App() {
   const [board, setBoard] = useState(() => generateBoard());
-  let gameWon = false;
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-  if (board.every((die) => die.value === board[0].value && die.locked)) {
-    gameWon = true;
-  }
+  const gameWon = board.every(
+    (die) => die.value === board[0].value && die.locked,
+  );
+
+  useEffect(() => {
+    if (gameWon) {
+      buttonRef.current?.focus();
+    }
+  }, [gameWon]);
 
   function generateBoard(): DieProps[] {
     return Array(10)
@@ -70,6 +76,7 @@ export default function App() {
         <div className="grid grid-cols-5 w-2xl gap-2">{dice}</div>
         <div>
           <button
+            ref={buttonRef}
             className="bg-(--foreground) rounded-2xl text-(--accent) text-4xl px-4 py-2 cursor-pointer"
             onClick={gameWon ? () => setBoard(generateBoard()) : rollDice}
           >
